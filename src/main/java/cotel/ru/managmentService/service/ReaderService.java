@@ -16,19 +16,43 @@ public class ReaderService {
         this.repository = repository;
     }
 
+    public List<Reader> allReaders() {
+        return repository.allReaders();
+    }
+
+    /**
+     * Получение данных о читателе по id
+     * @param id - идентификатор читателя
+     * @return
+     */
     public Reader getReaderById(long id) {
         return repository.getReaderById(id);
     }
 
+    /**
+     * Получение списка всех полученных книг определенному читателю
+     * @param id - идентификатор читателя
+     * @return
+     */
     public List<Issue> getAllIssueBooksToReader(long id) {
         return repository.getAllIssueBooksToReader(id);
     }
 
+    /**
+     * Добавление читателя
+     * @param reader - данные читателя
+     * @return
+     */
     public Reader addReader(Reader reader) {
         return repository.addReader(reader);
     }
 
-    public String deleteReader(long id) {
-        return repository.deleteReader(id);
+    /**
+     * Удаление информации о читателе
+     * @param id - идентификатор читателя
+     * @return
+     */
+    public void deleteReader(long id) {
+        repository.deleteReader(id);
     }
 }

@@ -30,6 +30,7 @@ public class ReaderController {
 
 
     //TODO не доделан ибо вечный null
+
     /**
      * Запрос на получение списка выдачей читателю
      *
@@ -43,6 +44,7 @@ public class ReaderController {
 
     /**
      * Запрос на добавление читателя
+     *
      * @param reader - информация о читателе
      * @return - возвращает добаленного читателя с его идентификационным номером
      */
@@ -53,12 +55,13 @@ public class ReaderController {
 
     /**
      * Запрос на удаление читателя по id
+     *
      * @param id - идентификатор
      * @return - выводит сообщение об успешном удалении читателя
      */
     @DeleteMapping("/{id}")
-    public String deleteReader(@PathVariable long id) {
-        return repository.deleteReader(id);
+    public void deleteReader(@PathVariable long id) {
+        repository.deleteReader(id);
     }
 
 }

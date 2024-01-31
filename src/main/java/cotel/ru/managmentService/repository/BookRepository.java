@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
+//TODO Сделать везде где необходимо проверку и вывод ошибок (Response<Entity>)
+
 @Repository
 public class BookRepository {
     private final List<Book> books;
@@ -19,11 +21,7 @@ public class BookRepository {
 
     @PostConstruct
     public void generateData() {
-        books.addAll(List.of(
-                new Book("Темная башня"),
-                new Book("Зерцалия"),
-                new Book("Амерканские боги")
-        ));
+        books.addAll(List.of(new Book("Темная башня"), new Book("Зерцалия"), new Book("Амерканские боги")));
     }
 
     /**
@@ -42,10 +40,7 @@ public class BookRepository {
      * @return - возвращение информации о книге
      */
     public Book getBookById(long id) {
-        return books.stream()
-                .filter(it -> Objects.equals(it.getId(), id))
-                .findFirst()
-                .orElse(null);
+        return books.stream().filter(it -> Objects.equals(it.getId(), id)).findFirst().orElse(null);
     }
 
     /**
@@ -57,6 +52,18 @@ public class BookRepository {
     public Book addBook(Book book) {
         books.add(book);
         return book;
+    }
+
+    /**
+     * Получение списка доступных для выдачи книг
+     *
+     * @return - возвращает список книг, которые есть на полках
+     */
+    public List<Book> getListAvailableBooks() {
+        List<Book> availableBooks = books;
+        availableBooks.removeIf(it -> !it.isBookAvailable());
+
+        return availableBooks;
     }
 
     /**
@@ -73,5 +80,4 @@ public class BookRepository {
         books.removeIf(it -> it.getId() == id);
         return "Книга с идентификатором \"" + id + "\" удалена из репозитория!";
     }
-
 }

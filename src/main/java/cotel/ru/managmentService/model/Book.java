@@ -11,7 +11,7 @@ public class Book {
     private static long sequence = 1L;
     private final long id;
     private final String name;
-
+    private boolean bookAvailable = true;
 
     @JsonCreator
     public Book(String name) {

@@ -1,7 +1,9 @@
 package cotel.ru.managmentService.repository;
 
+import cotel.ru.managmentService.model.Book;
 import cotel.ru.managmentService.model.Issue;
 import cotel.ru.managmentService.model.Reader;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+
+//TODO Сделать везде где необходимо проверку и вывод ошибок (Response<Entity>)
+
 
 @Repository
 @RequiredArgsConstructor
@@ -18,10 +23,24 @@ public class ReaderRepository {
 
 
     public ReaderRepository() {
-        this.readers = new ArrayList<>(List.of(
+        this.readers = new ArrayList<>();
+    }
+
+    @PostConstruct
+    public void generateData() {
+        readers.addAll(List.of(
                 new Reader("Catherine"),
                 new Reader("Alex")
         ));
+    }
+
+    /**
+     * Вывод всех читателей
+     *
+     * @return
+     */
+    public List<Reader> allReaders() {
+        return List.copyOf(readers);
     }
 
     /**
@@ -43,6 +62,7 @@ public class ReaderRepository {
 
 
     //TODO исправить вечный null
+
     /**
      * Должен возвращать список выданных книг данному читателю
      *
@@ -53,7 +73,7 @@ public class ReaderRepository {
         List<Issue> listIssueBooks = new ArrayList<>(issueRepository.getAllIssues());
         for (Issue issue : listIssueBooks) {
             System.out.println(issue);
-            if (issue.getReaderId() == id)
+            if (issue.getReader().getId() == id)
                 listIssueBooks.add(issue);
         }
         return listIssueBooks;
@@ -62,6 +82,7 @@ public class ReaderRepository {
 
     /**
      * Добавление нового читателя
+     *
      * @param reader - содержит информацию о читателе
      * @return - возвращает инф-цию о чителе с идентификационным номером
      */
@@ -72,6 +93,7 @@ public class ReaderRepository {
 
     /**
      * Удаление информации о читателе
+     *
      * @param id - идентификатор
      * @return - возвращает сообщение о успешном удалении
      */

@@ -26,6 +26,10 @@ public class BookService {
         return repository.addBook(book);
     }
 
+    public List<Book> getListAvailableBooks() {
+        return repository.getListAvailableBooks();
+    }
+
     public String deleteBook(long id) {
         return repository.deleteBook(id);
     }

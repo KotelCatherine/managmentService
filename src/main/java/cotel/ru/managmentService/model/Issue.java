@@ -2,6 +2,7 @@ package cotel.ru.managmentService.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Data;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
 
@@ -10,16 +11,17 @@ public class Issue {
     public static long sequence = 1L;
 
     private final long id;
-    private final long bookId;
-    private final long readerId;
+    private final Book book;
+    private final Reader reader;
 
-    private final LocalDateTime timestamp;
+    private LocalDateTime issueAt;
+    private LocalDateTime returnAt;
 
     @JsonCreator
-    public Issue(long bookId, long readerId) {
+    public Issue(Book book, Reader reader) {
         this.id = sequence++;
-        this.bookId = bookId;
-        this.readerId = readerId;
-        this.timestamp = LocalDateTime.now();
+        this.book = book;
+        this.reader = reader;
+        this.issueAt = LocalDateTime.now();
     }
 }

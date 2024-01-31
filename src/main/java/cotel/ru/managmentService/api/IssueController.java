@@ -1,5 +1,6 @@
 package cotel.ru.managmentService.api;
 
+import cotel.ru.managmentService.model.Book;
 import cotel.ru.managmentService.model.Issue;
 import cotel.ru.managmentService.service.IssueService;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,7 @@ public class IssueController {
 
     /**
      * Запрос на выдачу книги
+     *
      * @param request - содержит в себе id книги и id читателя
      * @return - возвращает статус о создании выдачи
      */
@@ -38,11 +40,23 @@ public class IssueController {
 
     /**
      * Запрос на получении информации о выданной книге по id
+     *
      * @param id - идентификационный номер
      * @return - возвращает информацию о книге
      */
     @GetMapping("/{id}")
-    public Issue bookIssuanceInformation(@PathVariable long id){
+    public Issue bookIssuanceInformation(@PathVariable long id) {
         return service.bookIssuanceInformationById(id);
+    }
+
+    /**
+     * Запрос на возврат книги
+     *
+     * @param id - идентификатор книги
+     * @return
+     */
+    @PutMapping("/{id}")
+    public Book returnBook(@PathVariable long id) {
+        return service.returnAtBook(id);
     }
 }
