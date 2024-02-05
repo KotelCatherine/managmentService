@@ -31,8 +31,8 @@ public class IssueService {
 
 
     public Issue issue(IssueRequest request) {
-        Optional<Book> book = Optional.ofNullable(bookRepository.getBookById(request.getBookId()));
-        Optional<Reader> reader = Optional.ofNullable(readerRepository.getReaderById(request.getReaderId()));
+        Optional<Book> book = bookRepository.findById(request.getBookId());
+        Optional<Reader> reader = readerRepository.findById(request.getReaderId());
 
         if (book.isEmpty()) {
             throw new NoSuchElementException("Не найдена книга с идентификатором \"" + request.getBookId() + "\".");
@@ -60,16 +60,17 @@ public class IssueService {
      * @return
      */
     public List<Issue> getAllIssues() {
-        return issueRepository.getAllIssues();
+        return issueRepository.getAll();
     }
 
     /**
      * Получение информации по выданной книге
+     *
      * @param id
      * @return
      */
-    public Issue bookIssuanceInformationById(long id) {
-        return issueRepository.bookIssuanceInformationById(id);
+    public Optional<Issue> bookIssuanceInformationById(long id) {
+        return issueRepository.findIssueByBookId(id);
     }
 
     /**
@@ -79,9 +80,9 @@ public class IssueService {
      */
     public Book returnAtBook(long id){
 
-        Optional<Book> book = Optional.ofNullable(bookRepository.getBookById(id));
-        Optional<Issue> issue = Optional.ofNullable(issueRepository.bookIssuanceInformationById(id));
-        Optional<Reader> reader = Optional.ofNullable(readerRepository.getReaderById(issue.get().getReader().getId()));
+        Optional<Book> book = bookRepository.findById(id);
+        Optional<Issue> issue = issueRepository.findIssueByBookId(id);
+        Optional<Reader> reader = readerRepository.findById(issue.get().getReader().getId());
 
         if (book.isEmpty()) {
             log.info("Книга с данным идентификатором не найдена");

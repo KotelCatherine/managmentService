@@ -1,20 +1,30 @@
 package cotel.ru.managmentService.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import jakarta.persistence.*;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
+@Entity
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
+@Table(name = "Reader")
 public class Reader {
-    private static long sequence = 1L;
 
-    private final long id;
-    private final String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "count_book")
     private int countBook;
 
-    @JsonCreator
+    @JoinColumn(name = "issue_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    private Issue issue;
+
     public Reader(String name) {
-        this(sequence++, name);
+        this.name = name;
     }
 }

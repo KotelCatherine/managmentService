@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -45,7 +46,7 @@ public class IssueController {
      * @return - возвращает информацию о книге
      */
     @GetMapping("/{id}")
-    public Issue bookIssuanceInformation(@PathVariable long id) {
+    public Optional<Issue> bookIssuanceInformation(@PathVariable long id) {
         return service.bookIssuanceInformationById(id);
     }
 

@@ -18,15 +18,17 @@ public class BookController {
 
     /**
      * Запрос на получение списка книг
+     *
      * @return вывод списка
      */
     @GetMapping
-    public List<Book> getListBook(){
+    public List<Book> getListBook() {
         return repository.getListBooks();
     }
 
     /**
      * Запрос на получение описания книги по id
+     *
      * @param id - идентификационный номер книги
      * @return - вывод информации
      */
@@ -37,21 +39,22 @@ public class BookController {
 
     /**
      * Запрос на добавление книги
+     *
      * @param book - информация о книги
      * @return - возвращает добавленную книгу с идентификационным номером
      */
     @PostMapping
     public Book addBook(@RequestBody Book book) {
-        return repository.addBook(book);
+        return repository.saveBook(book);
     }
 
     /**
      * Запрос на удаление книги по id
+     *
      * @param id - идентификационный номер
-     * @return - возвращает сообщение об успешном удалении
      */
     @DeleteMapping("/{id}")
-    public String deleteBook(@PathVariable long id) {
-        return repository.deleteBook(id);
+    public void deleteBook(@PathVariable long id) {
+        repository.deleteBook(id);
     }
 }

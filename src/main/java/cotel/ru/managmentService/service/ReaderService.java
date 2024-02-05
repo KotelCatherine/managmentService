@@ -1,11 +1,11 @@
 package cotel.ru.managmentService.service;
 
-import cotel.ru.managmentService.model.Issue;
 import cotel.ru.managmentService.model.Reader;
 import cotel.ru.managmentService.repository.ReaderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReaderService {
@@ -17,7 +17,7 @@ public class ReaderService {
     }
 
     public List<Reader> allReaders() {
-        return repository.allReaders();
+        return repository.findAll();
     }
 
     /**
@@ -25,17 +25,8 @@ public class ReaderService {
      * @param id - идентификатор читателя
      * @return
      */
-    public Reader getReaderById(long id) {
-        return repository.getReaderById(id);
-    }
-
-    /**
-     * Получение списка всех полученных книг определенному читателю
-     * @param id - идентификатор читателя
-     * @return
-     */
-    public List<Issue> getAllIssueBooksToReader(long id) {
-        return repository.getAllIssueBooksToReader(id);
+    public Optional<Reader> getReaderById(long id) {
+        return repository.findById(id);
     }
 
     /**
@@ -43,8 +34,8 @@ public class ReaderService {
      * @param reader - данные читателя
      * @return
      */
-    public Reader addReader(Reader reader) {
-        return repository.addReader(reader);
+    public Reader saveReader(Reader reader) {
+        return repository.save(reader);
     }
 
     /**
@@ -53,6 +44,6 @@ public class ReaderService {
      * @return
      */
     public void deleteReader(long id) {
-        repository.deleteReader(id);
+        repository.deleteById(id);
     }
 }

@@ -1,27 +1,37 @@
 package cotel.ru.managmentService.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.web.bind.annotation.RequestMapping;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Entity
 @Data
+@Table(name = "Issue")
+@NoArgsConstructor
 public class Issue {
-    public static long sequence = 1L;
 
-    private final long id;
-    private final Book book;
-    private final Reader reader;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
+    @JoinColumn(name = "book_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    private Book book;
+
+    @JoinColumn(name = "reader_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    private Reader reader;
+
+    @Column(name = "issue_at")
     private LocalDateTime issueAt;
+
+    @Column(name = "return_at")
     private LocalDateTime returnAt;
 
-    @JsonCreator
     public Issue(Book book, Reader reader) {
-        this.id = sequence++;
         this.book = book;
         this.reader = reader;
-        this.issueAt = LocalDateTime.now();
     }
 }

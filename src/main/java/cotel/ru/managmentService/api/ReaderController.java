@@ -1,11 +1,10 @@
 package cotel.ru.managmentService.api;
 
-import cotel.ru.managmentService.model.Issue;
 import cotel.ru.managmentService.model.Reader;
 import cotel.ru.managmentService.service.ReaderService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/reader")
@@ -24,22 +23,8 @@ public class ReaderController {
      * @return - возвращает информацию
      */
     @GetMapping("/{id}")
-    public Reader getReaderById(@PathVariable long id) {
+    public Optional<Reader> getReaderById(@PathVariable long id) {
         return repository.getReaderById(id);
-    }
-
-
-    //TODO не доделан ибо вечный null
-
-    /**
-     * Запрос на получение списка выдачей читателю
-     *
-     * @param id - идентификационный номер читателя
-     * @return - возращает список выдачей
-     */
-    @GetMapping("/{id}/issue")
-    public List<Issue> getAllIssueBooksToReader(@PathVariable long id) {
-        return repository.getAllIssueBooksToReader(id);
     }
 
     /**
@@ -50,7 +35,7 @@ public class ReaderController {
      */
     @PostMapping
     public Reader addReader(@RequestBody Reader reader) {
-        return repository.addReader(reader);
+        return repository.saveReader(reader);
     }
 
     /**

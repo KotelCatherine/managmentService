@@ -15,22 +15,22 @@ public class BookService {
     }
 
     public List<Book> getListBooks() {
-        return repository.getBooks();
+        return repository.findAll();
     }
 
     public Book getBookById(long id) {
-        return repository.getBookById(id);
+        return repository.findById(id).get();
     }
 
-    public Book addBook(Book book) {
-        return repository.addBook(book);
+    public Book saveBook(Book book) {
+        return repository.save(book);
     }
 
     public List<Book> getListAvailableBooks() {
-        return repository.getListAvailableBooks();
+        return repository.findAllByBookAvailable(true);
     }
 
-    public String deleteBook(long id) {
-        return repository.deleteBook(id);
+    public void deleteBook(long id) {
+        repository.deleteById(id);
     }
 }

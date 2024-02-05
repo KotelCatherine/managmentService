@@ -1,83 +1,10 @@
 package cotel.ru.managmentService.repository;
 
 import cotel.ru.managmentService.model.Book;
-import jakarta.annotation.PostConstruct;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
 
-//TODO Сделать везде где необходимо проверку и вывод ошибок (Response<Entity>)
-
-@Repository
-public class BookRepository {
-    private final List<Book> books;
-
-    public BookRepository() {
-        this.books = new ArrayList<>();
-    }
-
-    @PostConstruct
-    public void generateData() {
-        books.addAll(List.of(new Book("Темная башня"), new Book("Зерцалия"), new Book("Амерканские боги")));
-    }
-
-    /**
-     * получение всего списка книг
-     *
-     * @return - возвращает список книг
-     */
-    public List<Book> getBooks() {
-        return List.copyOf(books);
-    }
-
-    /**
-     * получение книги по id
-     *
-     * @param id - идентификатор
-     * @return - возвращение информации о книге
-     */
-    public Book getBookById(long id) {
-        return books.stream().filter(it -> Objects.equals(it.getId(), id)).findFirst().orElse(null);
-    }
-
-    /**
-     * Добавление книги
-     *
-     * @param book - информация о книге
-     * @return - возвращает книгу с ее иднентификационным номером
-     */
-    public Book addBook(Book book) {
-        books.add(book);
-        return book;
-    }
-
-    /**
-     * Получение списка доступных для выдачи книг
-     *
-     * @return - возвращает список книг, которые есть на полках
-     */
-    public List<Book> getListAvailableBooks() {
-        List<Book> availableBooks = books;
-        availableBooks.removeIf(it -> !it.isBookAvailable());
-
-        return availableBooks;
-    }
-
-    /**
-     * Удаление книги из списка по id
-     *
-     * @param id - идентификатор
-     * @return - возвращает сообещние об успешном удалении
-     */
-    public String deleteBook(long id) {
-        if (books.get((int) id) == null) {
-            throw new NoSuchElementException("Книги с таким номером: \"" + id + "\" не существует");
-        }
-
-        books.removeIf(it -> it.getId() == id);
-        return "Книга с идентификатором \"" + id + "\" удалена из репозитория!";
-    }
+public interface BookRepository extends JpaRepository<Book, Long> {
+    List<Book> findAllByBookAvailable(Boolean bookAvailable);
 }
