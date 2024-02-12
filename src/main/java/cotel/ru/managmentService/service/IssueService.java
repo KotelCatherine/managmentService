@@ -7,10 +7,12 @@ import cotel.ru.managmentService.model.Reader;
 import cotel.ru.managmentService.repository.BookRepository;
 import cotel.ru.managmentService.repository.IssueRepository;
 import cotel.ru.managmentService.repository.ReaderRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,17 +21,24 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class IssueService {
 
     @Value("${application.max-allowed-value : 1}")
     private int maxAllowedBooks;
 
-    private final BookRepository bookRepository;
-    private final IssueRepository issueRepository;
-    private final ReaderRepository readerRepository;
+    private BookRepository bookRepository;
+    private IssueRepository issueRepository;
+    private ReaderRepository readerRepository;
 
+    @Autowired
+    public IssueService(BookRepository bookRepository, IssueRepository issueRepository, ReaderRepository readerRepository) {
+        this.bookRepository = bookRepository;
+        this.issueRepository = issueRepository;
+        this.readerRepository = readerRepository;
+    }
 
+    @Transactional
     public Issue issue(IssueRequest request) {
         Optional<Book> book = bookRepository.findById(request.getBookId());
         Optional<Reader> reader = readerRepository.findById(request.getReaderId());
@@ -60,7 +69,7 @@ public class IssueService {
      * @return
      */
     public List<Issue> getAllIssues() {
-        return issueRepository.getAll();
+        return issueRepository.findAll();
     }
 
     /**
@@ -78,6 +87,8 @@ public class IssueService {
      * @param id - идентификатор книги
      * @return -
      */
+
+    @Transactional
     public Book returnAtBook(long id){
 
         Optional<Book> book = bookRepository.findById(id);

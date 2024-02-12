@@ -1,6 +1,7 @@
 package cotel.ru.managmentService.model;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,20 +10,23 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Table(name = "Book")
+@Schema(name = "Книга")
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(name = "Идентификатор")
     private  long id;
 
     @Column(name = "name")
+    @Schema(name = "Имя")
     private  String name;
 
     @Column(name = "bookAvailable")
+    @Schema(name = "Доступная книга")
     private boolean bookAvailable = true;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "issue_id")
+    @OneToOne(mappedBy = "book")
     private Issue issue;
 
     public Book(String name){

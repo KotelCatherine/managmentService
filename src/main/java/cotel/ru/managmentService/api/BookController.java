@@ -2,58 +2,46 @@ package cotel.ru.managmentService.api;
 
 import cotel.ru.managmentService.model.Book;
 import cotel.ru.managmentService.service.BookService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/book")
+@Tag(name = "Book")
 public class BookController {
 
     private final BookService repository;
 
+    @Autowired
     public BookController(BookService repository) {
         this.repository = repository;
     }
 
-    /**
-     * Запрос на получение списка книг
-     *
-     * @return вывод списка
-     */
+
     @GetMapping
+    @Operation(summary = "get all books", description = "Получение списка со всеми книгами")
     public List<Book> getListBook() {
         return repository.getListBooks();
     }
 
-    /**
-     * Запрос на получение описания книги по id
-     *
-     * @param id - идентификационный номер книги
-     * @return - вывод информации
-     */
     @GetMapping("/{id}")
+    @Operation(summary = "get book by id", description = "Получение данных о книге по идентификатору")
     public Book getBookById(@PathVariable long id) {
         return repository.getBookById(id);
     }
 
-    /**
-     * Запрос на добавление книги
-     *
-     * @param book - информация о книги
-     * @return - возвращает добавленную книгу с идентификационным номером
-     */
     @PostMapping
+    @Operation(summary = "add new book", description = "Добавление новой книги")
     public Book addBook(@RequestBody Book book) {
         return repository.saveBook(book);
     }
 
-    /**
-     * Запрос на удаление книги по id
-     *
-     * @param id - идентификационный номер
-     */
     @DeleteMapping("/{id}")
+    @Operation(summary = "delete book by id", description = "Удаление книги по идентификатору")
     public void deleteBook(@PathVariable long id) {
         repository.deleteBook(id);
     }

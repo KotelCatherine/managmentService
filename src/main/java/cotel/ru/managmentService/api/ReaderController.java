@@ -2,49 +2,39 @@ package cotel.ru.managmentService.api;
 
 import cotel.ru.managmentService.model.Reader;
 import cotel.ru.managmentService.service.ReaderService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/reader")
+@Tag(name = "Reader")
 public class ReaderController {
 
     private final ReaderService repository;
 
+    @Autowired
     public ReaderController(ReaderService repository) {
         this.repository = repository;
     }
 
-    /**
-     * Запрос на получение информации о читателе по id
-     *
-     * @param id - идентификационный номер
-     * @return - возвращает информацию
-     */
     @GetMapping("/{id}")
+    @Operation(summary = "get reader by id", description = "получение информации о читателе")
     public Optional<Reader> getReaderById(@PathVariable long id) {
         return repository.getReaderById(id);
     }
 
-    /**
-     * Запрос на добавление читателя
-     *
-     * @param reader - информация о читателе
-     * @return - возвращает добаленного читателя с его идентификационным номером
-     */
     @PostMapping
+    @Operation(summary = "add reader", description = "добавление читателя")
     public Reader addReader(@RequestBody Reader reader) {
         return repository.saveReader(reader);
     }
 
-    /**
-     * Запрос на удаление читателя по id
-     *
-     * @param id - идентификатор
-     * @return - выводит сообщение об успешном удалении читателя
-     */
     @DeleteMapping("/{id}")
+    @Operation(summary = "delete reader by id", description = "удаление читателя по идентификатору")
     public void deleteReader(@PathVariable long id) {
         repository.deleteReader(id);
     }
