@@ -1,8 +1,8 @@
-package cotel.ru.managmentService.api;
+package ru.cotel.managmentService.api;
 
-import cotel.ru.managmentService.model.Book;
-import cotel.ru.managmentService.model.Issue;
-import cotel.ru.managmentService.service.IssueService;
+import ru.cotel.managmentService.model.Book;
+import ru.cotel.managmentService.model.Issue;
+import ru.cotel.managmentService.service.IssueService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;

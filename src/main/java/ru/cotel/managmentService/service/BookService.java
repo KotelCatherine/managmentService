@@ -1,7 +1,7 @@
-package cotel.ru.managmentService.service;
+package ru.cotel.managmentService.service;
 
-import cotel.ru.managmentService.model.Book;
-import cotel.ru.managmentService.repository.BookRepository;
+import ru.cotel.managmentService.model.Book;
+import ru.cotel.managmentService.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

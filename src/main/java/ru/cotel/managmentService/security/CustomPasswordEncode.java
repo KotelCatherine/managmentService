@@ -1,4 +1,4 @@
-package cotel.ru.managmentService.security;
+package ru.cotel.managmentService.security;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

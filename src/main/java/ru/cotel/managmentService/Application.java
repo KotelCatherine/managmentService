@@ -1,4 +1,4 @@
-package cotel.ru.managmentService;
+package ru.cotel.managmentService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,6 @@
-package cotel.ru.managmentService.repository;
+package ru.cotel.managmentService.repository;
 
-import cotel.ru.managmentService.model.Book;
+import ru.cotel.managmentService.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,5 +1,4 @@
-package cotel.ru.managmentService.model;
-
+package ru.cotel.managmentService.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -9,27 +8,27 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "Book")
-@Schema(name = "Книга")
-public class Book {
+@Table(name = "Reader")
+@Schema(name = "Читатель")
+public class Reader {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(name = "Идентификатор")
-    private  long id;
+    private long id;
 
     @Column(name = "name")
     @Schema(name = "Имя")
-    private  String name;
+    private String name;
 
-    @Column(name = "bookAvailable")
-    @Schema(name = "Доступная книга")
-    private boolean bookAvailable = true;
+    @Column(name = "count_book")
+    @Schema(name = "Количество книг")
+    private int countBook;
 
-    @OneToOne(mappedBy = "book")
+    @OneToOne(mappedBy = "reader")
     private Issue issue;
 
-    public Book(String name){
+    public Reader(String name) {
         this.name = name;
     }
 }

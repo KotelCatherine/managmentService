@@ -1,12 +1,13 @@
-package cotel.ru.managmentService.service;
+package ru.cotel.managmentService.service;
 
-import cotel.ru.managmentService.api.IssueRequest;
-import cotel.ru.managmentService.model.Book;
-import cotel.ru.managmentService.model.Issue;
-import cotel.ru.managmentService.model.Reader;
-import cotel.ru.managmentService.repository.BookRepository;
-import cotel.ru.managmentService.repository.IssueRepository;
-import cotel.ru.managmentService.repository.ReaderRepository;
+import ru.cotel.managmentService.annotation.Timer;
+import ru.cotel.managmentService.api.IssueRequest;
+import ru.cotel.managmentService.model.Book;
+import ru.cotel.managmentService.model.Issue;
+import ru.cotel.managmentService.model.Reader;
+import ru.cotel.managmentService.repository.BookRepository;
+import ru.cotel.managmentService.repository.IssueRepository;
+import ru.cotel.managmentService.repository.ReaderRepository;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import java.util.Optional;
 @Slf4j
 @Service
 @NoArgsConstructor
+@Timer
 public class IssueService {
 
     @Value("${application.max-allowed-value : 1}")

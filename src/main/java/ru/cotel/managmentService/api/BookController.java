@@ -1,7 +1,7 @@
-package cotel.ru.managmentService.api;
+package ru.cotel.managmentService.api;
 
-import cotel.ru.managmentService.model.Book;
-import cotel.ru.managmentService.service.BookService;
+import ru.cotel.managmentService.model.Book;
+import ru.cotel.managmentService.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

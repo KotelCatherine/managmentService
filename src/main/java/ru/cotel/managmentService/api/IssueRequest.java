@@ -1,4 +1,4 @@
-package cotel.ru.managmentService.api;
+package ru.cotel.managmentService.api;
 
 import lombok.Data;
 

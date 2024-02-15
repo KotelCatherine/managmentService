@@ -1,7 +1,8 @@
-package cotel.ru.managmentService.service;
+package ru.cotel.managmentService.service;
 
-import cotel.ru.managmentService.model.Reader;
-import cotel.ru.managmentService.repository.ReaderRepository;
+import ru.cotel.managmentService.annotation.Timer;
+import ru.cotel.managmentService.model.Reader;
+import ru.cotel.managmentService.repository.ReaderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class ReaderService {
         this.repository = repository;
     }
 
+    @Timer
     public List<Reader> allReaders() {
         return repository.findAll();
     }

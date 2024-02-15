@@ -1,7 +1,8 @@
-package cotel.ru.managmentService.api;
+package ru.cotel.managmentService.api;
 
-import cotel.ru.managmentService.model.Reader;
-import cotel.ru.managmentService.service.ReaderService;
+import ru.cotel.managmentService.annotation.Timer;
+import ru.cotel.managmentService.model.Reader;
+import ru.cotel.managmentService.service.ReaderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@Timer
 @RestController
 @RequestMapping("/reader")
 @Tag(name = "Reader")

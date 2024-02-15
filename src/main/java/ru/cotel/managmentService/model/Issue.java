@@ -1,4 +1,4 @@
-package cotel.ru.managmentService.model;
+package ru.cotel.managmentService.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
