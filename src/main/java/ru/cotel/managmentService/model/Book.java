@@ -16,7 +16,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(name = "Идентификатор")
-    private  long id;
+    private  Long id;
 
     @Column(name = "name")
     @Schema(name = "Имя")
@@ -32,4 +32,6 @@ public class Book {
     public Book(String name){
         this.name = name;
     }
+
+
 }

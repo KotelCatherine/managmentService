@@ -80,7 +80,7 @@ public class IssueService {
      * @param id
      * @return
      */
-    public Optional<Issue> bookIssuanceInformationById(long id) {
+    public Optional<Issue> bookIssuanceInformationById(Long id) {
         return issueRepository.findIssueByBookId(id);
     }
 
@@ -91,7 +91,7 @@ public class IssueService {
      */
 
     @Transactional
-    public Book returnAtBook(long id){
+    public Book returnAtBook(Long id){
 
         Optional<Book> book = bookRepository.findById(id);
         Optional<Issue> issue = issueRepository.findIssueByBookId(id);

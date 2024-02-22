@@ -15,7 +15,7 @@ public class Reader {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(name = "Идентификатор")
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     @Schema(name = "Имя")

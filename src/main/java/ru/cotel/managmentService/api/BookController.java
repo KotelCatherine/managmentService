@@ -1,11 +1,13 @@
 package ru.cotel.managmentService.api;
 
-import ru.cotel.managmentService.model.Book;
-import ru.cotel.managmentService.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.cotel.managmentService.model.Book;
+import ru.cotel.managmentService.service.BookService;
 
 import java.util.List;
 
@@ -30,13 +32,16 @@ public class BookController {
 
     @GetMapping("/{id}")
     @Operation(summary = "get book by id", description = "Получение данных о книге по идентификатору")
-    public Book getBookById(@PathVariable long id) {
-        return repository.getBookById(id);
+    public ResponseEntity<Book> getBookById(@PathVariable Long id) {
+        return repository.getBookById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @PostMapping
+    @PostMapping("/{name}")
     @Operation(summary = "add new book", description = "Добавление новой книги")
-    public Book addBook(@RequestBody Book book) {
+    public Book addBook(@PathVariable String name) {
+        Book book = new Book(name);
         return repository.saveBook(book);
     }
 

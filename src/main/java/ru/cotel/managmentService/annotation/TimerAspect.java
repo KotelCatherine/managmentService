@@ -22,11 +22,11 @@ public class TimerAspect {
 
     @Around("beansAnnotatedWith() || methodsAnnotatedWith()")
     public Object timerAspect(ProceedingJoinPoint joinPoint) throws Throwable {
-        long start = System.currentTimeMillis();
+        Long start = System.currentTimeMillis();
 
         Object result = joinPoint.proceed();
 
-        long end = System.currentTimeMillis() - start;
+        Long end = System.currentTimeMillis() - start;
 
         log.info("{} - {} #{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName(), end);
         return result;

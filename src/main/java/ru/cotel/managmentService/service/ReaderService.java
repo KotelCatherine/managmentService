@@ -27,7 +27,7 @@ public class ReaderService {
      * @param id - идентификатор читателя
      * @return
      */
-    public Optional<Reader> getReaderById(long id) {
+    public Optional<Reader> getReaderById(Long id) {
         return repository.findById(id);
     }
 

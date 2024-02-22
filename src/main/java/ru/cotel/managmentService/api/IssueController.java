@@ -44,13 +44,13 @@ public class IssueController {
 
     @GetMapping("/{id}")
     @Operation(summary = "obtaining information about the book issued by id", description = "получение информации о выданной книги по идентификатору")
-    public Optional<Issue> bookIssuanceInformation(@PathVariable long id) {
+    public Optional<Issue> bookIssuanceInformation(@PathVariable Long id) {
         return service.bookIssuanceInformationById(id);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "return book", description = "возврат книги")
-    public Book returnBook(@PathVariable long id) {
+    public Book returnBook(@PathVariable Long id) {
         return service.returnAtBook(id);
     }
 }

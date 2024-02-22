@@ -25,19 +25,20 @@ public class ReaderController {
 
     @GetMapping("/{id}")
     @Operation(summary = "get reader by id", description = "получение информации о читателе")
-    public Optional<Reader> getReaderById(@PathVariable long id) {
+    public Optional<Reader> getReaderById(@PathVariable Long id) {
         return repository.getReaderById(id);
     }
 
-    @PostMapping
+    @PostMapping("{name}")
     @Operation(summary = "add reader", description = "добавление читателя")
-    public Reader addReader(@RequestBody Reader reader) {
+    public Reader addReader(@PathVariable String name) {
+        Reader reader = new Reader(name);
         return repository.saveReader(reader);
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "delete reader by id", description = "удаление читателя по идентификатору")
-    public void deleteReader(@PathVariable long id) {
+    public void deleteReader(@PathVariable Long id) {
         repository.deleteReader(id);
     }
 

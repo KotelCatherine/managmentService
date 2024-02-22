@@ -5,6 +5,7 @@ import ru.cotel.managmentService.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -18,8 +19,8 @@ public class BookService {
         return repository.findAll();
     }
 
-    public Book getBookById(long id) {
-        return repository.findById(id).get();
+    public Optional<Book> getBookById(Long id) {
+        return repository.findById(id);
     }
 
     public Book saveBook(Book book) {
@@ -30,7 +31,7 @@ public class BookService {
         return repository.findAllByBookAvailable(true);
     }
 
-    public void deleteBook(long id) {
+    public void deleteBook(Long id) {
         repository.deleteById(id);
     }
 }

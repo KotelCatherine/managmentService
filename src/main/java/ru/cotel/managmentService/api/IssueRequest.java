@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class IssueRequest {
 
-    private long readerId;
-    private long bookId;
+    private Long readerId;
+    private Long bookId;
 }

@@ -17,7 +17,7 @@ public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(name = "Идентификатор")
-    private long id;
+    private Long id;
 
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     @OneToOne(cascade = CascadeType.ALL)
